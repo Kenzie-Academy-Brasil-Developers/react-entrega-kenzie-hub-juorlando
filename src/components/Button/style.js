@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button1 = styled.button`
+export const StyledButton1 = styled.button`
   width: 100%;
   height: 48px;
   background-color: var(--color-primary);
@@ -9,7 +9,7 @@ export const Button1 = styled.button`
   border-radius: 4px;
 `;
 
-export const Button2 = styled.button`
+export const StyledButton2 = styled.button`
   width: 100%;
   height: 48px;
   background-color: var(--color-grey-1);
@@ -18,7 +18,7 @@ export const Button2 = styled.button`
   border-radius: 4px;
 `;
 
-export const Button3 = styled.button`
+export const StyledButton3 = styled.button`
   width: 100%;
   height: 48px;
   background-color: var(--color-primary-negative);

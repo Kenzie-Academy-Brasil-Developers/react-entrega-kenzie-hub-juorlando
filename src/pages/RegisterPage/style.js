@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledRegisterBox = styled.div`
   width: 369px;
-  height: 1100px;
+  height: 971px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,35 +55,5 @@ export const StyledRegisterBox = styled.div`
       border-radius: 4px;
       padding: 10px;
     }
-  }
-`;
-
-export const StyledFormRegister = styled.form`
-  width: 100%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  padding: 42px 22px;
-  background-color: var(--color-grey-3);
-
-  label {
-    color: var(--color-grey-0);
-    font-size: small;
-  }
-
-  h2 {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    font-size: larger;
-  }
-
-  p {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    font-size: small;
-    color: var(--color-grey-1);
   }
 `;
