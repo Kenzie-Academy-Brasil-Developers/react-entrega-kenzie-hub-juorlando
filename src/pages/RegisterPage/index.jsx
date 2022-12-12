@@ -4,7 +4,7 @@ import { FormRegister } from "../../components/Form/FormRegister";
 import { Container } from "../../stylles/container";
 import { StyledRegisterBox } from "./style";
 
-export const RegisterPage = ({ registerUser }) => {
+export const RegisterPage = () => {
   return (
     <Container>
       <StyledRegisterBox>
@@ -14,7 +14,7 @@ export const RegisterPage = ({ registerUser }) => {
             <Link to="/">Voltar</Link>
           </button>
         </div>
-        <FormRegister registerUser={registerUser} />
+        <FormRegister/>
       </StyledRegisterBox>
     </Container>
   );

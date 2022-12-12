@@ -1,8 +1,12 @@
 import React from "react";
 import { Header } from "../../components/Header";
 import { StyledUserBox } from "./style";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { Tecnology } from "../../components/Tecnologias/TecnologyList";
 
-export const HomePage = ({ user, userLogout }) => {
+export const HomePage = () => {
+  const {user, userLogout} = useContext(UserContext)
   return (
     <>
       <Header userLogout={userLogout} />
@@ -12,6 +16,7 @@ export const HomePage = ({ user, userLogout }) => {
           <h3>{user.course_module}</h3>
         </StyledUserBox>
       )}
+      <Tecnology></Tecnology>
     </>
   );
 };

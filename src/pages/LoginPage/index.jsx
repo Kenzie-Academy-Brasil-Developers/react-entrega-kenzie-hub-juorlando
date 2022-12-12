@@ -2,8 +2,11 @@ import React from "react";
 import { Container } from "../../stylles/container";
 import { StyledBox } from "./style";
 import { FormLogin } from "../../components/Form/FormLogin";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
-export const LoginPage = ({ setUser, userLogin }) => {
+export const LoginPage = () => {
+  const {setUser, userLogin} = useContext(UserContext)
   return (
     <Container>
       <StyledBox>

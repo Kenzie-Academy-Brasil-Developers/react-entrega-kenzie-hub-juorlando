@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 
-export const ProtectedRoute = ({user}) => {
+export const ProtectedRoute = () => {
+
+  const {user} = useContext(UserContext)
 
     const navigate = useNavigate()
 

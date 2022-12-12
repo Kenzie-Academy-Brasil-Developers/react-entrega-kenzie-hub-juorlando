@@ -6,8 +6,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema } from "./LoginSchema";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext";
 
-export const FormLogin = ({ userLogin, setUser }) => {
+export const FormLogin = () => {
+  const {userLogin} = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -19,6 +22,7 @@ export const FormLogin = ({ userLogin, setUser }) => {
   });
 
   const onSubmit = (data) => userLogin(data, setLoading);
+  
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h2>Login</h2>

@@ -6,8 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { RegisterSchema } from "./RegisterSchema";
 import { useState } from "react";
 import { StyledFormRegister } from "./style";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext";
 
-export const FormRegister = ({ registerUser }) => {
+export const FormRegister = () => {
+  const {registerUser} = useContext(UserContext)
   const [loading, setLoading] = useState(false);
 
   const {
@@ -17,11 +20,13 @@ export const FormRegister = ({ registerUser }) => {
   } = useForm({
     resolver: yupResolver(RegisterSchema),
   });
-
-  const onSubmit = (data) => registerUser(data, setLoading);
+  const submit = (data) => {
+    registerUser(data, setLoading)
+  
+  };
 
   return (
-    <StyledFormRegister onSubmit={handleSubmit(onSubmit)}>
+    <StyledFormRegister onSubmit={handleSubmit(submit)}>
       <h2>Crie sua conta</h2>
       <p>Rápido e grátis, vamos nessa</p>
       <label>Nome</label>
@@ -72,8 +77,7 @@ export const FormRegister = ({ registerUser }) => {
         disabled={loading}
       />
       {errors.contact && <p>{errors.contact.message}</p>}
-      <select register={register("course_module")} disabled={loading}>
-        {errors.course_module && <p>{errors.course_module.message}</p>}
+      <select id="course_module" {...register("course_module")} disabled={loading}>
         <option value="Primeiro Módulo">Primeiro Módulo</option>
         <option value="Segundo Módulo">Segundo Módulo</option>
         <option value="Terceiro Módulo">Terceiro Módulo</option>
@@ -81,6 +85,7 @@ export const FormRegister = ({ registerUser }) => {
         <option value="Quinto Módulo">Quinto Módulo</option>
         <option value="Sexto Módulo">Sexto Módulo</option>
       </select>
+      {errors.course_module && <p>{errors.course_module.message}</p>}
       <Button3 type="submit" disabled={loading}></Button3>
     </StyledFormRegister>
   );

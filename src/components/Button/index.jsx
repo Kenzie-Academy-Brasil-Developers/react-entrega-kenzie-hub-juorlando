@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { StyledButton1, StyledButton2, StyledButton3 } from "./style";
+import { StyledButton1, StyledButton2, StyledButton3, StyledButton4 } from "./style";
 
 export const Button1 = ({ type, disabled }) => {
   return (
@@ -23,5 +23,13 @@ export const Button3 = ({ type, disabled }) => {
     <StyledButton3 type={type} disabled={disabled}>
       {disabled ? "Cadastrando..." : "Cadastrar"}
     </StyledButton3>
+  );
+};
+
+export const Button4 = () => {
+  return (
+    <StyledButton4>
+      Excluir
+    </StyledButton4>
   );
 };

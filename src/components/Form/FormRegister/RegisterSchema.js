@@ -16,15 +16,11 @@ export const RegisterSchema = yup.object().shape({
       /(?=.*?[#?!@$%^&*-])/,
       "É necessário pelo menos um caractere especial"
     ),
-  confirmPassword: yup.string().when("password", {
-    is: (val) => (val && val.length > 0 ? true : false),
-    then: yup
-      .string()
-      .oneOf([yup.ref("password")], "As senhas devem ser idênticas."),
-  }),
-  bio: yup.string().max(140, "Sua bio deve ter no máximo 140 caracteres."),
-  contact: yup
+  confirmPassword: yup
     .string()
-    .required("O contato é necessário."),
+    .required()
+    .oneOf([yup.ref("password")], "As senhas devem ser idênticas."),
+  bio: yup.string().max(140, "Sua bio deve ter no máximo 140 caracteres."),
+  contact: yup.string().required("O contato é necessário."),
   course_module: yup.string().required("Confirme seu módulo atual."),
 });

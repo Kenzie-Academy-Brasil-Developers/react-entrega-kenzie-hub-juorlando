@@ -26,3 +26,12 @@ export const StyledButton3 = styled.button`
   border: solid 1px var(--color-primary-negative);
   border-radius: 4px;
 `;
+
+export const StyledButton4 = styled.button`
+  width: 110px;
+  height: 48px;
+  background-color: var(--color-grey-2);
+  color: var(--color-grey-0);
+  border: solid 1px var(--color-grey-2);
+  border-radius: 4px;
+`;
