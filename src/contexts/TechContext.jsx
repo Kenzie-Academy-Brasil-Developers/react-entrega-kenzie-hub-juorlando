@@ -7,7 +7,6 @@ import { api } from "../services/api";
 export const TechContext = createContext();
 
 export const TechProvider = ({ children }) => {
-
   const [addTech, setAddTech] = useState([]);
 
   const [techs, setTechs] = useState([]);
@@ -31,7 +30,6 @@ export const TechProvider = ({ children }) => {
       toast.success("Tecnologia adicionada.");
 
       setAddTech(response);
-
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -52,7 +50,6 @@ export const TechProvider = ({ children }) => {
       toast.success("Removido com sucesso.");
 
       setAddTech(response);
-
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -65,7 +62,7 @@ export const TechProvider = ({ children }) => {
       setLoading(true);
 
       const techID = localStorage.getItem("@TECHID");
-      console.log(techID)
+
       const response = await api.put(`/users/techs/${techID}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,7 +72,6 @@ export const TechProvider = ({ children }) => {
       toast.success("Editado com sucesso.");
 
       setAddTech(response.data);
-
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
