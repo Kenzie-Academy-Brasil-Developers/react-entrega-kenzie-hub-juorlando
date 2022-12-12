@@ -7,12 +7,13 @@ import { api } from "../services/api";
 export const TechContext = createContext();
 
 export const TechProvider = ({ children }) => {
-
   const [addTech, setAddTech] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("@TOKEN");
+
+  const techID = localStorage.getItem("@TECHID");
 
   async function addTechs(data) {
     try {
@@ -28,8 +29,7 @@ export const TechProvider = ({ children }) => {
 
       setAddTech(response);
 
-      window.location.reload()
-
+      window.location.reload();
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -38,7 +38,6 @@ export const TechProvider = ({ children }) => {
   }
 
   async function removeTechs(id) {
-
     try {
       setLoading(true);
 
@@ -52,8 +51,7 @@ export const TechProvider = ({ children }) => {
 
       setAddTech(response);
 
-      window.location.reload()
-
+      window.location.reload();
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -61,29 +59,29 @@ export const TechProvider = ({ children }) => {
     }
   }
 
-  // async function editTechs(data, id) {
-  //   console.log(data)
-  //   try {
-  //     setLoading(true);
+  async function editTechs(data) {
+    try {
+      setLoading(true);
 
-  //     const response = await api.put(`/users/techs/${id}`, data, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
+      const techID = localStorage.getItem("@TECHID");
+      console.log(techID)
+      const response = await api.put(`/users/techs/${techID}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  //     toast.success("Editado com sucesso.");
+      toast.success("Editado com sucesso.");
 
-  //     setAddTech(response);
+      setAddTech(response.data);
 
-  //     window.location.reload()
-
-  //   } catch (error) {
-  //     toast.error("Ops! Algo deu errado");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+      window.location.reload();
+    } catch (error) {
+      toast.error("Ops! Algo deu errado");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <TechContext.Provider
@@ -91,7 +89,7 @@ export const TechProvider = ({ children }) => {
         addTechs,
         setAddTech,
         removeTechs,
-        // editTechs,
+        editTechs,
       }}
     >
       {children}

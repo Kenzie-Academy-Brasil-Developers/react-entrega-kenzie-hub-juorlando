@@ -32,8 +32,6 @@ export const Tecnology = () => {
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  const [catchID, setCatchID] = useState(null);
-
   const { editTechs } = useContext(TechContext);
   const {
     register,
@@ -51,7 +49,7 @@ export const Tecnology = () => {
     setIsOpen(false);
   }
 
-  const onSubmit = (data) => editTechs(data, catchID);
+  const onSubmit = (data) => editTechs(data);
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -81,7 +79,11 @@ export const Tecnology = () => {
       <AddTechs />
       <StyledTechsList>
         {techs.map((element) => (
-          <li key={element.id} id={element.id}>
+          <li
+            key={element.id}
+            id={element.id}
+            onClick={() => localStorage.setItem("@TECHID", element.id)}
+          >
             <p onClick={openModal}>{element.title}</p>
             <p>{element.status}</p>
             <button
@@ -125,7 +127,9 @@ export const Tecnology = () => {
                 <button className="button" type="submit">
                   Salvar alterações
                 </button>
-                <Button4 tye="button" onClick={closeModal}>Excluir</Button4>
+                <Button4 tye="button" onClick={closeModal}>
+                  Excluir
+                </Button4>
               </aside>
             </form>
           </StyledEditModal>

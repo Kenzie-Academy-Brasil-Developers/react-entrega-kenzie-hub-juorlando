@@ -65,6 +65,7 @@ export const UserProvider = ({ children }) => {
   function userLogout() {
     localStorage.removeItem("@TOKEN");
     localStorage.removeItem("@USERID");
+    localStorage.removeItem("@TECHID")
 
     setUser(null);
 
