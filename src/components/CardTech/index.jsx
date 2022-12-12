@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { TechContext } from "../../contexts/TechContext";
+import { FaTrash } from "react-icons/fa";
 
 export const CardTech = ({ setIsOpen }) => {
   const { techs, removeTechs } = useContext(TechContext);
@@ -16,15 +17,17 @@ export const CardTech = ({ setIsOpen }) => {
           id={element.id}
           onClick={() => localStorage.setItem("@TECHID", element.id)}
         >
-          <p onClick={openModal}>{element.title}</p>
-          <p>{element.status}</p>
+          <div onClick={openModal}>
+            <p>{element.title}</p>
+            <p className="status">{element.status}</p>
+          </div>
           <button
             className="remove"
             id={element.id}
             type="button"
             onClick={() => removeTechs(element.id)}
           >
-            Remover
+            <FaTrash />
           </button>
         </li>
       ))}

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { lixeira } from "../../../assets/img/lixeira.png"
 
 export const StyledTechsList = styled.ul`
   width: 780px;
@@ -8,7 +7,6 @@ export const StyledTechsList = styled.ul`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: var(--color-grey-3);
   gap: 12px;
@@ -29,12 +27,18 @@ export const StyledTechsList = styled.ul`
 
   li:hover {
     background-color: var(--color-grey-2);
+  }
 
-    .remove {
-      background-image: url(../../../assets/img/lixeira.png);
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+  div{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .status{
+    color: var(--color-grey-1)
   }
 `;
 

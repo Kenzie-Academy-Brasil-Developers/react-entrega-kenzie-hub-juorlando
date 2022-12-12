@@ -7,8 +7,6 @@ import { api } from "../services/api";
 export const TechContext = createContext();
 
 export const TechProvider = ({ children }) => {
-  const [addTech, setAddTech] = useState([]);
-
   const [techs, setTechs] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -29,7 +27,7 @@ export const TechProvider = ({ children }) => {
 
       toast.success("Tecnologia adicionada.");
 
-      setAddTech(response);
+      setTechs([...techs, response.data]);
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -47,9 +45,11 @@ export const TechProvider = ({ children }) => {
         },
       });
 
-      toast.success("Removido com sucesso.");
+      const newList = techs.filter((element) => element.id !== id);
 
-      setAddTech(response);
+      setTechs(newList);
+
+      toast.success("Removido com sucesso.");
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -71,7 +71,24 @@ export const TechProvider = ({ children }) => {
 
       toast.success("Editado com sucesso.");
 
-      setAddTech(response.data);
+      (async function () {
+        if (token) {
+          try {
+            setLoading(true);
+            const response = await api.get("/profile", {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+
+            setTechs(response.data.techs);
+          } catch (error) {
+            console.log(error);
+          } finally {
+            setLoading(false);
+          }
+        }
+      })();
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -82,7 +99,7 @@ export const TechProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
 
-    (async function () {
+    (async function Technologs() {
       if (token) {
         try {
           setLoading(true);
@@ -106,7 +123,6 @@ export const TechProvider = ({ children }) => {
     <TechContext.Provider
       value={{
         addTechs,
-        setAddTech,
         removeTechs,
         editTechs,
         techs,
