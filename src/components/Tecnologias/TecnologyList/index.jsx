@@ -9,6 +9,7 @@ import { Button4 } from "../../Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { EditSchema } from "./EditSchema";
+import { CardTech } from "../../CardTech";
 
 Modal.setAppElement("#root");
 
@@ -24,15 +25,12 @@ const customStyles = {
 };
 
 export const Tecnology = () => {
-  const [techs, setTechs] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
-  const { removeTechs } = useContext(TechContext);
-
-  const [modalIsOpen, setIsOpen] = useState(false);
-
   const { editTechs } = useContext(TechContext);
+
   const {
     register,
     handleSubmit,
@@ -41,60 +39,17 @@ export const Tecnology = () => {
     resolver: yupResolver(EditSchema),
   });
 
-  function openModal() {
-    setIsOpen(true);
-  }
-
   function closeModal() {
     setIsOpen(false);
   }
 
   const onSubmit = (data) => editTechs(data);
 
-  useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
-
-    (async () => {
-      if (token) {
-        try {
-          setLoading(true);
-          const response = await api.get("/profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          setTechs(response.data.techs);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    })();
-  }, []);
-
   return (
     <>
       <AddTechs />
       <StyledTechsList>
-        {techs.map((element) => (
-          <li
-            key={element.id}
-            id={element.id}
-            onClick={() => localStorage.setItem("@TECHID", element.id)}
-          >
-            <p onClick={openModal}>{element.title}</p>
-            <p>{element.status}</p>
-            <button
-              id={element.id}
-              type="button"
-              onClick={() => removeTechs(element.id)}
-            >
-              Remover
-            </button>
-          </li>
-        ))}
+        <CardTech setIsOpen={setIsOpen} />
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}

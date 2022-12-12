@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { lixeira } from "../../../assets/img/lixeira.png"
 
 export const StyledTechsList = styled.ul`
   width: 780px;
@@ -29,7 +30,7 @@ export const StyledTechsList = styled.ul`
   li:hover {
     background-color: var(--color-grey-2);
 
-    button {
+    .remove {
       background-image: url(../../../assets/img/lixeira.png);
       background-position: center;
       background-repeat: no-repeat;

@@ -7,7 +7,10 @@ import { api } from "../services/api";
 export const TechContext = createContext();
 
 export const TechProvider = ({ children }) => {
+
   const [addTech, setAddTech] = useState([]);
+
+  const [techs, setTechs] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +32,6 @@ export const TechProvider = ({ children }) => {
 
       setAddTech(response);
 
-      window.location.reload();
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -51,7 +53,6 @@ export const TechProvider = ({ children }) => {
 
       setAddTech(response);
 
-      window.location.reload();
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
@@ -75,13 +76,35 @@ export const TechProvider = ({ children }) => {
 
       setAddTech(response.data);
 
-      window.location.reload();
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     } finally {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
+
+    (async function () {
+      if (token) {
+        try {
+          setLoading(true);
+          const response = await api.get("/profile", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          setTechs(response.data.techs);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    })();
+  }, []);
 
   return (
     <TechContext.Provider
@@ -90,6 +113,8 @@ export const TechProvider = ({ children }) => {
         setAddTech,
         removeTechs,
         editTechs,
+        techs,
+        setTechs,
       }}
     >
       {children}
