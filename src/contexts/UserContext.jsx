@@ -7,7 +7,6 @@ import { api } from "../services/api";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-
   const [user, setUser] = useState(null);
 
   const [nowLoading, setNowLoading] = useState(false);
@@ -28,9 +27,8 @@ export const UserProvider = ({ children }) => {
           });
 
           setUser(response.data);
-          
-          navigate("/home");
 
+          navigate("/home");
         } catch (error) {
           console.log(error);
         } finally {
@@ -40,7 +38,7 @@ export const UserProvider = ({ children }) => {
     })();
   }, []);
 
-  async function userLogin(data, loading) {
+  const userLogin = async (data, loading) => {
     try {
       loading(true);
 
@@ -60,20 +58,19 @@ export const UserProvider = ({ children }) => {
     } finally {
       loading(false);
     }
-  }
+  };
 
-  function userLogout() {
+  const userLogout = () => {
     localStorage.removeItem("@TOKEN");
     localStorage.removeItem("@USERID");
-    localStorage.removeItem("@TECHID")
+    localStorage.removeItem("@TECHID");
 
     setUser(null);
 
     navigate("/");
-  }
+  };
 
-  async function registerUser(data, loading) {
- 
+  const registerUser = async (data, loading) => {
     try {
       loading(true);
 
@@ -90,7 +87,7 @@ export const UserProvider = ({ children }) => {
     } finally {
       loading(false);
     }
-  }
+  };
   return (
     <UserContext.Provider
       value={{

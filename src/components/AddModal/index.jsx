@@ -9,7 +9,7 @@ import { StyledModal } from "./style";
 
 export const AddModal = ({ closeModal }) => {
   const [loading, setLoading] = useState(false);
-  const {addTechs} = useContext(TechContext)
+  const { addTechs } = useContext(TechContext);
   const {
     register,
     handleSubmit,
@@ -18,7 +18,12 @@ export const AddModal = ({ closeModal }) => {
     resolver: yupResolver(TechAddSchema),
   });
 
-  const onSubmit = (data) => addTechs(data);
+  const onSubmit = (data) => {
+    addTechs(data);
+    setTimeout(() => {
+      closeModal();
+    }, 500);
+  };
 
   return (
     <StyledModal>

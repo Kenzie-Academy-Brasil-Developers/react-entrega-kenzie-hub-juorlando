@@ -29,6 +29,8 @@ export const Tecnology = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const [title, setTitle] = useState("");
+
   const { editTechs } = useContext(TechContext);
 
   const {
@@ -37,19 +39,25 @@ export const Tecnology = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(EditSchema),
+    defaultValues: {},
   });
 
-  function closeModal() {
+  const closeModal = () => {
     setIsOpen(false);
-  }
+  };
 
-  const onSubmit = (data) => editTechs(data);
+  const onSubmit = (data) => {
+    editTechs(data);
+    setTimeout(() => {
+      closeModal();
+    }, 500);
+  };
 
   return (
     <>
       <AddTechs />
       <StyledTechsList>
-        <CardTech setIsOpen={setIsOpen} />
+        <CardTech setIsOpen={setIsOpen} setTitle={setTitle} />
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
@@ -65,10 +73,9 @@ export const Tecnology = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <label>Nome do projeto</label>
               <Input
-                type="text"
-                placeholder="Digite o nome da Tecnologia"
+                placeholder={title}
                 register={register("title")}
-                disabled={loading}
+                disabled
               />
               {errors.title && <p>{errors.title.message}</p>}
               <label>Status</label>

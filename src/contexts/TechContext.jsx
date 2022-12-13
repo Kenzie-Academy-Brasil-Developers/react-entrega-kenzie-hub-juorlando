@@ -15,7 +15,7 @@ export const TechProvider = ({ children }) => {
 
   const techID = localStorage.getItem("@TECHID");
 
-  async function addTechs(data) {
+  const addTechs = async (data) => {
     try {
       setLoading(true);
 
@@ -33,9 +33,9 @@ export const TechProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  async function removeTechs(id) {
+  const removeTechs = async (id) => {
     try {
       setLoading(true);
 
@@ -55,9 +55,9 @@ export const TechProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  async function editTechs(data) {
+  const editTechs = async (data) => {
     try {
       setLoading(true);
 
@@ -69,9 +69,10 @@ export const TechProvider = ({ children }) => {
         },
       });
 
+      
       toast.success("Editado com sucesso.");
 
-      (async function () {
+      (async () => {
         if (token) {
           try {
             setLoading(true);
@@ -94,12 +95,12 @@ export const TechProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
 
-    (async function Technologs() {
+    (async () => {
       if (token) {
         try {
           setLoading(true);
