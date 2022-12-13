@@ -18,7 +18,7 @@ export const RegisterSchema = yup.object().shape({
     ),
   confirmPassword: yup
     .string()
-    .required()
+    .required("A confirmação é obrigatória")
     .oneOf([yup.ref("password")], "As senhas devem ser idênticas."),
   bio: yup.string().max(140, "Sua bio deve ter no máximo 140 caracteres."),
   contact: yup.string().required("O contato é necessário."),
