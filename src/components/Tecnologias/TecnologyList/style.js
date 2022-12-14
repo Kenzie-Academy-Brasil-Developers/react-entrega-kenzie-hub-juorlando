@@ -87,7 +87,7 @@ export const StyledEditModal = styled.div`
     }
 
     .button {
-      width: 204px;
+      width: 100%;
       height: 48px;
       background-color: var(--color-primary-negative);
       color: var(--color-grey-0);

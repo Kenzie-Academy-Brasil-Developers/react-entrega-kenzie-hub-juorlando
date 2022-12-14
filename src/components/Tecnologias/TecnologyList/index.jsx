@@ -89,9 +89,6 @@ export const Tecnology = () => {
                 <button className="button" type="submit">
                   Salvar alterações
                 </button>
-                <Button4 tye="button" onClick={closeModal}>
-                  Excluir
-                </Button4>
               </aside>
             </form>
           </StyledEditModal>

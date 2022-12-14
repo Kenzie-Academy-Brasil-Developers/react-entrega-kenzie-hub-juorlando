@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { TechContext } from "../../contexts/TechContext";
 import { FaTrash } from "react-icons/fa";
 
-export const CardTech = ({ setIsOpen, setTitle }) => {
+export const CardTech = ({ setIsOpen, setTitle, setCatchID }) => {
   const { techs, removeTechs } = useContext(TechContext);
 
   const openModal = () => {
@@ -17,7 +17,12 @@ export const CardTech = ({ setIsOpen, setTitle }) => {
           id={element.id}
           onClick={() => localStorage.setItem("@TECHID", element.id)}
         >
-          <div onClick={() => {openModal(); setTitle(element.title)}}>
+          <div
+            onClick={() => {
+              openModal();
+              setTitle(element.title);
+            }}
+          >
             <p>{element.title}</p>
             <p className="status">{element.status}</p>
           </div>
